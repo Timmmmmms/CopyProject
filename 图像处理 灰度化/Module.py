@@ -4,6 +4,7 @@ import os
 图像的基本单位：像素
 一个小方块 需要3个像素表示RGB   0-255
 灰度化公式：
+    L
     0.299*R + 0.587*G + 0.114*B =
 
 所有的数字图像其本质都是一个多维矩阵
@@ -15,7 +16,7 @@ import os
     如何取值   0-255      值越大  越接近透明色；值越小   颜色越深
 
 """
-image = '1.jpg'
+image = '3.jpg'
 image_all = "绘画素描"+image
 img = Image.open(image)
 # ~ # 获取图像的模式
@@ -45,25 +46,25 @@ for i in range(Pen_size + 1, width-Pen_size - 1):
         lcolor = sum([img.getpixel((i-r,j))for r in range(Pen_size)])//Pen_size
         rcolor = sum([img.getpixel((i+r,j))for r in range(Pen_size)])//Pen_size
         if abs(lcolor - rcolor) > Color_Diff:
-            originalcolor -= (255 - img.getpixel((i,j))) // 2
+            originalcolor -= (255 - img.getpixel((i,j))) // 4
             # 将计算的值 赋值给新的图像
             new.putpixel((i,j),originalcolor)
         qcolor = sum([img.getpixel((i,j-r))for r in range(Pen_size)])//Pen_size
         wcolor = sum([img.getpixel((i,j+r))for r in range(Pen_size)])//Pen_size
         if abs(qcolor - wcolor) > Color_Diff:
-            originalcolor -= (255 - img.getpixel((i,j))) // 2
+            originalcolor -= (255 - img.getpixel((i,j))) // 4
             # 将计算的值 赋值给新的图像
             new.putpixel((i,j),originalcolor)
         zcolor = sum([img.getpixel((i-r,j-r))for r in range(Pen_size)])//Pen_size
         xcolor = sum([img.getpixel((i+r,j+r))for r in range(Pen_size)])//Pen_size
         if abs(zcolor - xcolor) > Color_Diff:
-            originalcolor -= (255 - img.getpixel((i,j))) // 2
+            originalcolor -= (255 - img.getpixel((i,j))) // 4
             # 将计算的值 赋值给新的图像
             new.putpixel((i,j),originalcolor)
         acolor = sum([img.getpixel((i+r,j-r))for r in range(Pen_size)])//Pen_size
         scolor = sum([img.getpixel((i-r,j+r))for r in range(Pen_size)])//Pen_size
         if abs(acolor - scolor) > Color_Diff:
-            originalcolor -= (255 - img.getpixel((i,j))) // 2
+            originalcolor -= (255 - img.getpixel((i,j))) // 4
             # 将计算的值 赋值给新的图像
             new.putpixel((i,j),originalcolor)
 #保存图像
